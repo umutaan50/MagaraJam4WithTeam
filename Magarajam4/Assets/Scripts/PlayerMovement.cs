@@ -16,15 +16,16 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D playerRigidbody;
 
 
-    private void Awake()
-    {
-        boxCollider2d = transform.GetComponent<BoxCollider2D>();
-        playerRigidbody = transform.GetComponent<Rigidbody2D>();
-    }
+    //private void Awake()
+    //{
+        
+    //}
 
     // Start is called before the first frame update
     void Start()
     {
+        boxCollider2d = GetComponent<BoxCollider2D>();
+        playerRigidbody = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame

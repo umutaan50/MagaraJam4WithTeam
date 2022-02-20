@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             PauseGame();
         }
@@ -35,12 +35,10 @@ public class GameManager : MonoBehaviour
             pauseText.gameObject.SetActive(false);
             Time.timeScale = 1;
             isPaused = false;
-            backgroundMusic.Play();
         }
         else
         {
             pauseText.gameObject.SetActive(true);
-            backgroundMusic.Pause();
             Time.timeScale = 0;
             isPaused = true;
         }
