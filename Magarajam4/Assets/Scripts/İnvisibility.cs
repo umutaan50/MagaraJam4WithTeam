@@ -44,6 +44,7 @@ public class İnvisibility : MonoBehaviour
         spriterenderer.sortingOrder = 1;
         spriterenderer.color = new Color(spriterenderer.color.r , spriterenderer.color.g, spriterenderer.color.b, 0.3f);
         colider.transform.localPosition = new Vector3(0, 0, colider.transform.position.z);
+        CopyComponent<Animator>(gameObject.GetComponent<Animator>(), colider);
     }
 
     void visibility()
@@ -51,5 +52,16 @@ public class İnvisibility : MonoBehaviour
         if (colider == null) return;
         Destroy(colider);
         spriterenderer.color = new Color(spriterenderer.color.r, spriterenderer.color.g, spriterenderer.color.b,1);        
+    }
+    T CopyComponent<T>(T original, GameObject destination) where T : Component
+    {
+        System.Type type = original.GetType();
+        Component copy = destination.AddComponent(type);
+        System.Reflection.FieldInfo[] fields = type.GetFields();
+        foreach (System.Reflection.FieldInfo field in fields)
+        {
+            field.SetValue(copy, field.GetValue(original));
+        }
+        return copy as T;
     }
 }
