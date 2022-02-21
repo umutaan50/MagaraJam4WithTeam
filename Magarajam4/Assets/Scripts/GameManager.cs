@@ -9,7 +9,7 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    private AudioSource backgroundMusic;
+    public AudioSource backgroundMusic;
     public GameObject optionsMenu;
     public bool isPaused = false; 
     // Start is called before the first frame update

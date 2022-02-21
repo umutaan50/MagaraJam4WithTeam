@@ -11,6 +11,8 @@ public class İnvisibility : MonoBehaviour
     GameObject colider;
     public bool invisible;
     bool onetime = true;
+    Animator animator;
+    int way = 0;
 
     void Start()
     {
@@ -30,6 +32,12 @@ public class İnvisibility : MonoBehaviour
             visibility();
             onetime = true;
         }
+        if (animator != null)
+        {
+            PlayerMovement pl = gameObject.GetComponent<PlayerMovement>();
+            animator.SetBool("Jump", pl.animator.GetBool("Jump"));
+            animator.SetBool("İsRunning", pl.animator.GetBool("İsRunning"));
+        }
     }
 
     void invisibility()
@@ -38,20 +46,24 @@ public class İnvisibility : MonoBehaviour
         colider = new GameObject("collider");
         colider.transform.SetParent(gameObject.transform);
         colider.transform.localScale += new Vector3((width / 2),(height / 2),0);
+        colider.transform.localRotation = Quaternion.Euler(new Vector3(0,way,0));
         SpriteRenderer outrenderer = colider.AddComponent<SpriteRenderer>();
         outrenderer.sprite = spriterenderer.sprite;
         outrenderer.color = new Color(0, 0, 0, 0.30f);
         spriterenderer.sortingOrder = 1;
         spriterenderer.color = new Color(spriterenderer.color.r , spriterenderer.color.g, spriterenderer.color.b, 0.3f);
         colider.transform.localPosition = new Vector3(0, 0, colider.transform.position.z);
-        CopyComponent<Animator>(gameObject.GetComponent<Animator>(), colider);
+        animator = colider.AddComponent<Animator>();
+        animator.runtimeAnimatorController = gameObject.GetComponent<Animator>().runtimeAnimatorController;
+
     }
 
     void visibility()
     {
         if (colider == null) return;
         Destroy(colider);
-        spriterenderer.color = new Color(spriterenderer.color.r, spriterenderer.color.g, spriterenderer.color.b,1);        
+        spriterenderer.color = new Color(spriterenderer.color.r, spriterenderer.color.g, spriterenderer.color.b,1); 
+        
     }
     T CopyComponent<T>(T original, GameObject destination) where T : Component
     {
