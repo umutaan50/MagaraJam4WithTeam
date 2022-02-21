@@ -9,8 +9,8 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    public TextMeshProUGUI pauseText;
     private AudioSource backgroundMusic;
+    public GameObject optionsMenu;
     public bool isPaused = false; 
     // Start is called before the first frame update
     void Start()
@@ -32,13 +32,13 @@ public class GameManager : MonoBehaviour
     {
         if (isPaused)
         {
-            pauseText.gameObject.SetActive(false);
+            optionsMenu.SetActive(false);
             Time.timeScale = 1;
             isPaused = false;
         }
         else
         {
-            pauseText.gameObject.SetActive(true);
+            optionsMenu.SetActive(true);
             Time.timeScale = 0;
             isPaused = true;
         }
