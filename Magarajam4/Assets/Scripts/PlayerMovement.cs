@@ -32,12 +32,22 @@ public class PlayerMovement : MonoBehaviour
     }
     void Update()
     {
-        
+        cd.text = Cooldown.ToString();
+
         horizontalInput = Input.GetAxis("Horizontal");
-        if (Cooldown == 0)
+        if (Cooldown <= 0)
         {
             StopCoroutine(coroutine);
         }
+        else
+        {
+            StartCoroutine(CooldownWait());
+        }
+        if (Cooldown < 0)
+        {
+            Cooldown++;
+        }
+
 
         if (Health <= 0)
         {
@@ -67,25 +77,23 @@ public class PlayerMovement : MonoBehaviour
         {
             animator.SetBool("ÝsRunning", false);
         }
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E) && Cooldown == 0)
         {
             playerRigidbody.AddForce(Vector3.up * jumpForce * 1.6f, ForceMode2D.Impulse);
             animator.SetBool("Jump", true);
             Invoke("StopJump", 0.5f);
-            Cooldown = 5;
+
         }
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.Q) && Cooldown == 0)
         {
             Ýnvisibility invisibilty =  gameObject.GetComponent<Ýnvisibility>();
             invisibility.invisible = true;
             Invoke("BeVisible",3);
-            Cooldown = 5;
         }
-        if (Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.F) && Cooldown == 0)
         {
             speed = speed * 1.7f;
             Invoke("Slow",3);
-            Cooldown = 5;
         }
 
   
@@ -94,17 +102,23 @@ public class PlayerMovement : MonoBehaviour
     public void Slow()
     {
         speed = speed / 1.7f;
+        Cooldown = 5;
+
     }
 
     public void BeVisible()
     {
         Ýnvisibility invisibilty = gameObject.GetComponent<Ýnvisibility>();
         invisibility.invisible = false;
+        Cooldown = 5;
+
     }
 
     void StopJump()
     {
         animator.SetBool("Jump", false);
+        Cooldown = 5;
+
     }
 
     private bool IsGrounded()
@@ -115,9 +129,8 @@ public class PlayerMovement : MonoBehaviour
 
     IEnumerator CooldownWait()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(2);
         Cooldown-= 1;
-        cd.text = Cooldown.ToString();
     }
     
 }
