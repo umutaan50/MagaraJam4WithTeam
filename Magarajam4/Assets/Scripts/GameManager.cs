@@ -9,8 +9,13 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+<<<<<<< HEAD
     public AudioSource backgroundMusic;
     public GameObject optionsMenu;
+=======
+    public TextMeshProUGUI pauseText;
+    private AudioSource backgroundMusic;
+>>>>>>> parent of 7d11327 (Added menus)
     public bool isPaused = false; 
     // Start is called before the first frame update
     void Start()
@@ -32,13 +37,13 @@ public class GameManager : MonoBehaviour
     {
         if (isPaused)
         {
-            optionsMenu.SetActive(false);
+            pauseText.gameObject.SetActive(false);
             Time.timeScale = 1;
             isPaused = false;
         }
         else
         {
-            optionsMenu.SetActive(true);
+            pauseText.gameObject.SetActive(true);
             Time.timeScale = 0;
             isPaused = true;
         }
