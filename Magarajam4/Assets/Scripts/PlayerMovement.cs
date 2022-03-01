@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
@@ -14,7 +14,7 @@ public class PlayerMovement : MonoBehaviour
     public BoxCollider2D boxCollider2d,Groundcheck;
     public Animator animator;
     private Rigidbody2D playerRigidbody;
-    public Ýnvisibility invisibility;
+    public Ä°nvisibility invisibility;
     public float Health = 100;
     public GameManager manager;
     public int Cooldown = 5;
@@ -27,7 +27,7 @@ public class PlayerMovement : MonoBehaviour
             boxCollider2d = GetComponent<BoxCollider2D>();
             playerRigidbody = GetComponent<Rigidbody2D>();
             animator = GetComponent<Animator>();
-            invisibility = GetComponent<Ýnvisibility>();
+            invisibility = GetComponent<Ä°nvisibility>();
             coroutine = StartCoroutine(CooldownWait());
     }
     void Update()
@@ -59,23 +59,23 @@ public class PlayerMovement : MonoBehaviour
         if (horizontalInput > 0)
         {
             transform.localRotation = Quaternion.Euler(transform.localRotation.x, 0, transform.localRotation.z);
-            animator.SetBool("ÝsRunning", true);
+            animator.SetBool("Ä°sRunning", true);
         }
         else if (horizontalInput < 0)
         {
             transform.localRotation = Quaternion.Euler(transform.localRotation.x, 180, transform.localRotation.z);
             horizontalInput = Mathf.Abs(horizontalInput);
-            animator.SetBool("ÝsRunning", true);
+            animator.SetBool("Ä°sRunning", true);
         }
         else
         {
-            animator.SetBool("ÝsRunning",false);
+            animator.SetBool("Ä°sRunning",false);
         }
         transform.Translate(Vector2.right * horizontalInput * speed * Time.deltaTime);
      
         if (animator.GetBool("Jump"))
         {
-            animator.SetBool("ÝsRunning", false);
+            animator.SetBool("Ä°sRunning", false);
         }
         if (Input.GetKeyDown(KeyCode.E) && Cooldown == 0)
         {
@@ -86,7 +86,7 @@ public class PlayerMovement : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Q) && Cooldown == 0)
         {
-            Ýnvisibility invisibilty =  gameObject.GetComponent<Ýnvisibility>();
+            Ä°nvisibility invisibilty =  gameObject.GetComponent<Ä°nvisibility>();
             invisibility.invisible = true;
             Invoke("BeVisible",3);
         }
@@ -108,7 +108,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void BeVisible()
     {
-        Ýnvisibility invisibilty = gameObject.GetComponent<Ýnvisibility>();
+        Ä°nvisibility invisibilty = gameObject.GetComponent<Ä°nvisibility>();
         invisibility.invisible = false;
         Cooldown = 5;
 
