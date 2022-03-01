@@ -10,8 +10,13 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
     public AudioSource backgroundMusic;
     public GameObject optionsMenu;
+=======
+    public TextMeshProUGUI pauseText;
+    private AudioSource backgroundMusic;
+>>>>>>> parent of 7d11327 (Added menus)
 =======
     public TextMeshProUGUI pauseText;
     private AudioSource backgroundMusic;
